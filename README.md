@@ -1,6 +1,6 @@
-# Proyecto Desarrollo Web
+# Sistemas operativos - Tarea Microservicios
 
-Este es el codigo del proyecto de Desarrollo Web, aca se subiran actualizaciones grupales sobre el proyecto final.
+Este es el codigo de la tarea de microservicios.
 El proyecto es basicamente un e-commerce donde el usuario podra realizar compras de diferentes productos cargados por un administrador en una BD de MySQL que mas adelante estaremos cargando y consultando con Spring.
 
 ## Requisitos para ejecutar el proyecto
