@@ -1,0 +1,461 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>¡Bienvenido {{usuario.nombre}}!</h1>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <a href="#" (click)="logout()"><span style="color:red">Cerrar Sesión</span></a>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Mi perfil:</h2>
+            <div class="row">
+                <div class="col-md-11">
+                    <label>Universidad: Universidad Mariano Gálvez</label>
+                    <br>
+                    <label>Nombre: Doullier Emmanuel Carrera Gómez   Carné: 3190-09-1743</label>
+                    <br>
+                    <label>Nombre: Denis Jose Alegría Granados       Carné: 3190-18-3240</label>
+                    <br>
+                    <label>Nombre: Jose Flavio Pedro Daniel Dardon   Carné: 3190-10-14248</label>
+                    <br>
+                    <label>Curso: Desarrollo Web, sección: "A"</label>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h2>Productos: <button class="btn btn-success" (click)="agregarProductos()">Nuevo</button></h2>
+            <br>
+            <form (ngSubmit)="crearProductos()" id="crearPr" *ngIf="crearPr">
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="text" [(ngModel)]="producto.nombre_producto" [ngModelOptions]="{standalone: true}"
+                        placeholder="Nombre del producto" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="text" [(ngModel)]="producto.descripcion_producto" [ngModelOptions]="{standalone: true}"
+                        placeholder="Descripción del producto" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="number step=any" [(ngModel)]="producto.costo_unitario" [ngModelOptions]="{standalone: true}"
+                        placeholder="Costo unitario del producto" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="file" [(ngModel)]="producto.imagen" [ngModelOptions]="{standalone: true}"
+                        placeholder="Imagen" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="number" [(ngModel)]="producto.cantidad_disponible" [ngModelOptions]="{standalone: true}"
+                        placeholder="Cantidad disponible de productos" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-primary float-right" value="Crear">
+                    </div>
+                </div>
+                <br>
+            </form>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Costo unitario</th>
+                                <th>Imagen</th>
+                                <th>Cantidad disponible</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor = "let producto of productos">
+                                <td>
+                                    {{producto.nombre_producto}}
+                                </td>
+                                <td>
+                                    {{producto.descripcion_producto}}
+                                </td>
+                                <td>
+                                    {{producto.costo_unitario}}
+                                </td>
+                                <td>
+                                    {{producto.imagen}}
+                                </td>
+                                <td>
+                                    {{producto.cantidad_disponible}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h2>Anuncios: <button class="btn btn-success" (click)="agregarAnuncios()">Nuevo</button></h2>
+            <br>
+            <form (ngSubmit)="crearAnuncios()" id="crearAn" *ngIf="crearAn">
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="text" [(ngModel)]="anuncio.informacion" [ngModelOptions]="{standalone: true}"
+                        placeholder="Información del anuncio" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="file" [(ngModel)]="anuncio.imagenA" [ngModelOptions]="{standalone: true}"
+                        placeholder="Imagen" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="datetime" [(ngModel)]="anuncio.fecha_inicio" [ngModelOptions]="{standalone: true}"
+                        placeholder="Fecha inicio del anuncio" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="datetime" [(ngModel)]="anuncio.fecha_fin" [ngModelOptions]="{standalone: true}"
+                        placeholder="Fecha fin del anuncio" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-primary float-right" value="Crear">
+                    </div>
+                </div>
+                <br>
+            </form>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID Anuncio</th>
+                                <th>Información</th>
+                                <th>Imagen</th>
+                                <th>Fecha inicio</th>
+                                <th>Fecha fin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor = "let anuncio of anuncios">
+                                <td>
+                                    {{anuncio.idanuncio}}
+                                </td>
+                                <td>
+                                    {{anuncio.informacion}}
+                                </td>
+                                <td>
+                                    {{anuncio.imagenA}}
+                                </td>
+                                <td>
+                                    {{anuncio.fecha_inicio}}
+                                </td>
+                                <td>
+                                    {{anuncio.fecha_fin}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h2>Usuarios: <button class="btn btn-success" (click)="agregarUsuarios()">Nuevo</button></h2>
+            <br>
+            <form (ngSubmit)="crearUsuarios()" id="crearUsr" *ngIf="crearUsr">
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="text" [(ngModel)]="usr.nombre" [ngModelOptions]="{standalone: true}"
+                        placeholder="Nombre del usuario" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="text" [(ngModel)]="usr.usuario" [ngModelOptions]="{standalone: true}"
+                        placeholder="Usuario" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="text" [(ngModel)]="usr.password" [ngModelOptions]="{standalone: true}"
+                        placeholder="Password" class="form-control" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        Telefonos: <button class="btn btn-warning btn-sm" (click)="agregarTelefonoE()">Agregar</button>
+                    </div>
+                </div>
+                <div class ="row" *ngFor="let telefonoE of usr.telefonoEncargadoList">
+                    <br>
+                    <br>
+                    <div class="col-md-11">
+                        <input type="text" [(ngModel)]="telefonoE.telefonoE" [ngModelOptions]="{standalone: true}"
+                        placeholder="Número" class="form-control" required>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-danger btn-sm" (click)="borrarTelefonoE(telefonoE)">Borrar</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        Direcciones: <button class="btn btn-warning btn-sm" (click)="agregarDireccionE()">Agregar</button>
+                    </div>
+                </div>
+                <div class ="row" *ngFor="let direccionE of usr.direccionEncargadoList">
+                    <br>
+                    <br>
+                    <div class="col-md-11">
+                        <input type="text" [(ngModel)]="direccionE.direccionE" [ngModelOptions]="{standalone: true}"
+                        placeholder="Dirección" class="form-control" required>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-danger btn-sm" (click)="borrarDireccionE(direccionE)">Borrar</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-primary float-right" value="Crear">
+                    </div>
+                </div>
+                <br>
+            </form>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Rol</th>
+                                <th>Nombre</th>
+                                <th>Usuario</th>
+                                <th>Password</th>
+                                <th>Teléfonos</th>
+                                <th>Direcciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor = "let usr of usuarios">
+                                <td>
+                                    {{usr.rol_idrol}}
+                                </td>
+                                <td>
+                                    {{usr.nombre}}
+                                </td>
+                                <td>
+                                    {{usr.usuario}}
+                                </td>
+                                <td>
+                                    {{usr.password}}
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li *ngFor="let telefonoE of usr.telefonoEncargadoList">{{telefonoE.telefonoE}}</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li *ngFor="let direccionE of usr.direccionEncargadoList">{{direccionE.direccionE}}</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h2>Compras Activas / Despachadas:</h2>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No. Compra</th>
+                                <th>Cliente</th>
+                                <th>Fecha de compra</th>
+                                <th>Estado</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                                <th>Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor = "let compra of compras">
+                            <tr *ngIf= "compra.estado==='A' || compra.estado==='D'">
+                                <td>
+                                    {{compra.idcompra}}
+                                </td>
+                                <td>
+                                    {{compra.cliente_idcorreo}}
+                                </td>
+                                <td>
+                                    {{compra.fecha_compra}}
+                                </td>
+                                <td>
+                                    {{compra.estado}}
+                                </td>
+                                <td>
+                                    {{compra.cantidad}}
+                                </td>
+                                <td>
+                                    {{compra.total | currency:'Q '}}
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-success" (click)="verDetallesCAD()">Ver Detalles</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h2>Compras entregadas:</h2>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No. Compra</th>
+                                <th>Cliente</th>
+                                <th>Fecha de compra</th>
+                                <th>Estado</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                                <th>Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor = "let compra of compras">
+                            <tr *ngIf="compra.estado==='E'">
+                                <td>
+                                    {{compra.idcompra}}
+                                </td>
+                                <td>
+                                    {{compra.cliente_idcorreo}}
+                                </td>
+                                <td>
+                                    {{compra.fecha_compra}}
+                                </td>
+                                <td>
+                                    {{compra.estado}}
+                                </td>
+                                <td>
+                                    {{compra.cantidad}}
+                                </td>
+                                <td>
+                                    {{compra.total | currency:'Q '}}
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-success" (click)="verDetallesCE()">Ver Detalles</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h2>Compras canceladas:</h2>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No. Compra</th>
+                                <th>Cliente</th>
+                                <th>Fecha de compra</th>
+                                <th>Estado</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                                <th>Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor = "let compra of compras">
+                            <tr *ngIf="compra.estado==='C'">
+                                <td>
+                                    {{compra.idcompra}}
+                                </td>
+                                <td>
+                                    {{compra.cliente_idcorreo}}
+                                </td>
+                                <td>
+                                    {{compra.fecha_compra}}
+                                </td>
+                                <td>
+                                    {{compra.estado}}
+                                </td>
+                                <td>
+                                    {{compra.cantidad}}
+                                </td>
+                                <td>
+                                    {{compra.total | currency:'Q '}}
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-success" (click)="verDetallesCC()">Ver Detalles</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,268 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Bienvenido {{usuario.nombre}}</h1>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <a href="#" (click)="logout()"><span style="color:red">Cerrar Sesión</span></a>
+    </div>
+    <div class="row" *ngIf="loading">
+        <div class="col-md-12">
+            <div class="spinner-border text-info float-right" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Clientes: <button class="btn btn-success" (click)="agregar()">Nuevo</button></h2>
+        </div>
+    </div>
+    <form (ngSubmit)="crearCliente()" id="crear" *ngIf="crear">
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="email" [(ngModel)]="cliente.idcorreo" [ngModelOptions]="{standalone: true}"
+                placeholder="Correo" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" [(ngModel)]="cliente.nombre" [ngModelOptions]="{standalone: true}"
+                placeholder="Nombre" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" [(ngModel)]="cliente.nit" [ngModelOptions]="{standalone: true}"
+                placeholder="NIT" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                Telefonos: <button class="btn btn-warning btn-sm" (click)="agregarTelefono()">Agregar</button>
+            </div>
+        </div>
+        <div class ="row" *ngFor="let telefono of cliente.telefonoClienteList">
+            <br>
+            <br>
+            <div class="col-md-11">
+                <input type="text" [(ngModel)]="telefono.telefono_cliente" [ngModelOptions]="{standalone: true}"
+                placeholder="Número" class="form-control" required>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-danger btn-sm" (click)="borrarTelefono(telefono)">Borrar</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                Direcciones: <button class="btn btn-warning btn-sm" (click)="agregarDireccion()">Agregar</button>
+            </div>
+        </div>
+        <div class ="row" *ngFor="let direccion of cliente.direccionClienteList">
+            <br>
+            <br>
+            <div class="col-md-11">
+                <input type="text" [(ngModel)]="direccion.direccion_cliente" [ngModelOptions]="{standalone: true}"
+                placeholder="Dirección" class="form-control" required>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-danger btn-sm" (click)="borrarDireccion(direccion)">Borrar</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-primary float-right" value="Crear">
+            </div>
+        </div>
+    </form>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Correo</th>
+                        <th>Nombre</th>
+                        <th>NIT</th>
+                        <th>Teléfonos</th>
+                        <th>Direcciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let cliente of clientes">
+                        <td>
+                            {{cliente.idcorreo}}
+                        </td>
+                        <td>
+                            {{cliente.nombre}}
+                        </td>
+                        <td>
+                            {{cliente.nit}}
+                        </td>
+                        <td>
+                            <ul>
+                                <li *ngFor="let telefono of cliente.telefonoClienteList">{{telefono.telefono_cliente}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li *ngFor="let direccion of cliente.direccionClienteList">{{direccion.direccion_cliente}}</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h2>Compras Activas / Despachadas:</h2>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No. Compra</th>
+                                <th>Cliente</th>
+                                <th>Fecha de compra</th>
+                                <th>Estado</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor = "let compra of compras">
+                            <tr *ngIf= "compra.estado==='A' || compra.estado==='D'">
+                                <td>
+                                    {{compra.idcompra}}
+                                </td>
+                                <td>
+                                    {{compra.cliente_idcorreo}}
+                                </td>
+                                <td>
+                                    {{compra.fecha_compra}}
+                                </td>
+                                <td>
+                                    {{compra.estado}}
+                                </td>
+                                <td>
+                                    {{compra.cantidad}}
+                                </td>
+                                <td>
+                                    {{compra.total | currency:'Q '}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h2>Compras entregadas:</h2>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No. Compra</th>
+                                <th>Cliente</th>
+                                <th>Fecha de compra</th>
+                                <th>Estado</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor = "let compra of compras">
+                            <tr *ngIf="compra.estado==='E'">
+                                <td>
+                                    {{compra.idcompra}}
+                                </td>
+                                <td>
+                                    {{compra.cliente_idcorreo}}
+                                </td>
+                                <td>
+                                    {{compra.fecha_compra}}
+                                </td>
+                                <td>
+                                    {{compra.estado}}
+                                </td>
+                                <td>
+                                    {{compra.cantidad}}
+                                </td>
+                                <td>
+                                    {{compra.total | currency:'Q '}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h2>Compras canceladas:</h2>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No. Compra</th>
+                                <th>Cliente</th>
+                                <th>Fecha de compra</th>
+                                <th>Estado</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor = "let compra of compras">
+                            <tr *ngIf="compra.estado==='C'">
+                                <td>
+                                    {{compra.idcompra}}
+                                </td>
+                                <td>
+                                    {{compra.cliente_idcorreo}}
+                                </td>
+                                <td>
+                                    {{compra.fecha_compra}}
+                                </td>
+                                <td>
+                                    {{compra.estado}}
+                                </td>
+                                <td>
+                                    {{compra.cantidad}}
+                                </td>
+                                <td>
+                                    {{compra.total | currency:'Q '}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Crea tu cuenta ahora.</h1>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+    <div class="row" *ngIf="loading">
+        <div class="col-md-12">
+            <div class="spinner-border text-info float-right" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+    <form (ngSubmit)="crear()" id="crear">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" [(ngModel)]="usuario.nombre" [ngModelOptions]="{standalone: true}"
+                    placeholder="Nombre" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" [(ngModel)]="usuario.usuario" [ngModelOptions]="{standalone: true}"
+                    placeholder="Usuario" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="password" [(ngModel)]="usuario.password" [ngModelOptions]="{standalone: true}"
+                    placeholder="Password" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                Telefonos: <button class="btn btn-warning btn-sm" (click)="agregarTelefono()">Agregar</button>
+            </div>
+        </div>
+        <div class ="row" *ngFor="let telefono of usuario.telefonoEncargadoList">
+            <br>
+            <br>
+            <div class="col-md-11">
+                <input type="text" [(ngModel)]="telefono.telefonoE" [ngModelOptions]="{standalone: true}"
+                placeholder="Número" class="form-control" required>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-danger btn-sm" (click)="borrarTelefono(telefono)">Borrar</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                Direcciones: <button class="btn btn-warning btn-sm" (click)="agregarDireccion()">Agregar</button>
+            </div>
+        </div>
+        <div class ="row" *ngFor="let direccion of usuario.direccionEncargadoList">
+            <br>
+            <br>
+            <div class="col-md-11">
+                <input type="text" [(ngModel)]="direccion.direccionE" [ngModelOptions]="{standalone: true}"
+                placeholder="Dirección" class="form-control" required>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-danger btn-sm" (click)="borrarDireccion(direccion)">Borrar</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input class="btn btn-success float-right" type="submit" value="Crear">
+            </div>
+        </div>
+    </form>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <label class="float-right"> <a href="#" (click)="regresar()"> Regresar </a>
+            </label>
+        </div>
+    </div>
+</div>

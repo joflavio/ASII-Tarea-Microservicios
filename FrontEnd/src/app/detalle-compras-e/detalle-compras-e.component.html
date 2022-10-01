@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Detalle de compras entregadas:</h1>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <a href="/home-admin">Regresar</a>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No. Compra</th>
+                        <th>Nombre cliente</th>
+                        <th>Nit</th>
+                        <th>Correo electrónico</th>
+                        <th>Fecha de compra</th>
+                        <th>Teléfono</th>
+                        <th>Dirección de entrega</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody class="pointer" *ngFor="let compra of compras; let i = index">
+                    <tr *ngIf="compra.estado==='E'">
+                        <td>
+                            {{compra.idcompra}}
+                        </td>
+                        <td>
+                            {{clientes[i]?.nombre}}
+                        </td>
+                        <td>
+                            {{clientes[i]?.nit}}
+                        </td>
+                        <td>
+                            {{compra.cliente_idcorreo}}
+                        </td>
+                        <td>
+                            {{compra.fecha_compra}}
+                        </td>
+                        <td>
+                            <ul>
+                                <li *ngFor="let telefono of cliente.telefonoClienteList">{{telefono.telefono_cliente}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li *ngFor="let direccion of cliente.direccionClienteList">{{direccion.direccion_cliente}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            {{compra.total | currency:'Q '}}
+                        </td>
+                        <td>
+                            {{compra.estado}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
